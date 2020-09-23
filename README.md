@@ -3,4 +3,5 @@ A weather application that gives five days forecast on any available location. I
 libraries used are framer motion for router transitions <br>
 react-moment and moment for date and time formatting <br>
 react-chartist and chartist for plotting charts <br>
-Openweathermap API is the only API used for this application.
+Openweathermap API is the only API used for this application.<br>
+[Demo Link](https://reactweather-ani.netlify.app/)
