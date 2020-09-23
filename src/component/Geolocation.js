@@ -16,7 +16,7 @@ import OvercastClouds from '../animated/cloudy.svg'
 
 
 const Geolocation = (forecast) => {
-    console.log(forecast)
+    //console.log(forecast)
 
     //======= Navigation functions =========
 
