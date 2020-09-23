@@ -28,6 +28,7 @@ const FetchWeather = () => {
     const [icon, setIcon] = useState(null);
     const [condition, setCondition] = useState();
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
 
     //========= An async and await function to fetch default weather location =========
@@ -152,31 +153,33 @@ const FetchWeather = () => {
     //console.log(location.key)
 
     return (
-
+      
         <center>
-            <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
-                <div className="search-wrapper" onSubmit={requestWeatherDetail} >
-                    <Form />
+            {!loading ? <Spinner/> : 
+                <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
+                    <div className="search-wrapper" onSubmit={requestWeatherDetail} >
+                        <Form />
+                    </div>
+                    {((forecast && Object.keys(forecast).length)) ?
+                        <AnimatePresence exitBeforeEnter initial={false}>
+                            <Switch location={location} key={location.pathname}>
+                                {/* <Redirect exact from="/" to="/geolocation" />  */}
+                                <Route exact path="/">
+                                    {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
+                                </Route>
+
+                                <Route exact path="/displayinfo">
+                                    {!error ? <DisplayInfo {...forecast} {...requestWeatherDetail} /> : error}
+                                </Route>
+
+                                <Route exact path="/displayforecast">
+                                    {!error ? <DisplayForecast {...forecast} {...requestWeatherDetail} /> : error}
+                                </Route>
+                            </Switch>
+                        </AnimatePresence>
+                        : <span style={errormsg}>{error}{icon}</span>}
                 </div>
-                {((forecast && Object.keys(forecast).length)) ?
-                    <AnimatePresence exitBeforeEnter initial={false}>
-                        <Switch location={location} key={location.pathname}>
-                            {/* <Redirect exact from="/" to="/geolocation" />  */}
-                            <Route exact path="/">
-                                {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-
-                            <Route exact path="/displayinfo">
-                                {!error ? <DisplayInfo {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-
-                            <Route exact path="/displayforecast">
-                                {!error ? <DisplayForecast {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-                        </Switch>
-                    </AnimatePresence>
-                    : <span style={errormsg}>{error}{icon}</span>}
-            </div>
+            }
         </center>
     )
 }
