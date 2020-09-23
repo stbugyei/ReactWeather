@@ -168,11 +168,11 @@ const FetchWeather = () => {
                                     {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
                                 </Route>
 
-                                <Route exact path="/displayinfo">
+                                <Route path="/displayinfo">
                                     {!error ? <DisplayInfo {...forecast} {...requestWeatherDetail} /> : error}
                                 </Route>
 
-                                <Route exact path="/displayforecast">
+                                <Route path="/displayforecast">
                                     {!error ? <DisplayForecast {...forecast} {...requestWeatherDetail} /> : error}
                                 </Route>
                             </Switch>
