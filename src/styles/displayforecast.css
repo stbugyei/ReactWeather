@@ -1,0 +1,120 @@
+
+.display-forecast{
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.data-section {
+	font-size: 17px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: rgba(255, 255, 255, .8);
+	box-shadow: 0px 5px 20px -7px #000000;
+}
+
+.data-section__wrapper {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    margin: 2px auto;
+    width: 100%;
+    border: 1px solid #fff;
+    outline: none;
+    text-transform: capitalize;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.data-section__content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.data-section__content:nth-child(1) {
+	text-align: left;
+}
+
+.data-section__content:nth-child(2) {
+	text-align: center;
+}
+
+.data-section__content:nth-child(3) {
+	text-align: left;
+}
+
+.data-section__content:nth-child(4) {
+	padding-right: 5px;
+}
+
+
+.data-section__content img {
+	transform: scale(1);
+}
+
+.graph-section {
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+	margin: 20px auto;
+}
+
+.btn-details__wrapper {
+	margin-top: -8px;
+}
+
+.btn-direction i {
+	font-size: 1.4em;
+	border: none;
+	outline: none;
+	color: #fff;
+	background-color: transparent;
+	text-shadow: 0 0 3px #7a3cc7;
+	cursor: pointer;
+	-moz-transform-origin: right;
+	transform-origin: right;
+	-webkit-animation: horizontalSlide 1s infinite alternate;
+	animation: horizontalSlide .3s infinite alternate;
+}
+
+.btn-info {
+	position: relative;
+	padding: 8px;
+	border: 1px solid #fff;
+	border-radius: 2px;
+	background-color: rgba(255, 255, 255, .8);
+	outline: none;
+	cursor: pointer;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);	
+	box-shadow: 0px 5px 20px -10px #000000;
+	transition: all .5s;
+	width: 100%;
+}
+
+
+.btn-info:hover{
+	transition: all .5s;
+	color: rgb(145, 22, 22);
+	border-color:rgb(145, 22, 22);
+	box-shadow: 0 0 3px rgb(145, 22, 22);
+}
+
+@-webkit-keyframes verticalSlide {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(4px);
+	}
+}
+
+@keyframes verticalSlide {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(4px);
+	}
+}

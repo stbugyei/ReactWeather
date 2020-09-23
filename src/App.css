@@ -1,0 +1,558 @@
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	flex: 1;
+	min-height: auto;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.weather_details {
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 350px;
+	max-width: 100%;
+	margin: 20px auto;
+	border-radius: 5px;
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	background-size: cover;
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+	-webkit-animation: backgroundImg 40s linear infinite;
+	animation: backgroundImg 40s linear infinite;
+	overflow: hidden;
+	/* box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09); */
+	/* box-shadow: 0px 5px 20px -5px #000000; */
+	/* box-shadow: 0px 9px 42px -27px rgba(0, 0, 0, 0.68); */
+	box-shadow: 0px 7px 19px -15px #000000;
+	transition: background-image .3s ease-out;
+}
+
+.display-information,
+.geographic-loc {
+	position: relative;
+	width: 100%;
+	width: 100%;
+}
+
+/*================= Search props ===============*/
+
+.search-wrapper {
+	position: relative;
+	width: 100%;
+	top: 15px;
+	border: none;
+	transition: all .4s;
+}
+
+form {
+	position: relative;
+	width: 80%;
+	border: none;
+	transition: all .4s;
+}
+
+.form-content {
+	position: relative;
+	right: -21%;
+	width: 100%;
+	background: transparent;
+	height: 40px;
+	transition: all .4s;
+}
+
+.search-input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 35px;
+	height: 100%;
+	font-size: 1em;
+	border-radius: 25px;
+	border: none;
+	padding: 0px;
+	outline: 0;
+	visibility: hidden;
+	overflow: hidden;
+	white-space: nowrap;
+	background: rgba(255, 255, 255, 0.9);
+	animation: fade 1s;
+	transition: .6s all ease;
+}
+
+.search-input:focus {
+	border: 1px solid #1a237e;
+	box-shadow: 0 0 3px #1a237e;
+}
+
+.search-input:focus ~ .btn {
+	background-color: #1a237e;
+}
+
+.btn {
+	position: absolute;
+	top: 3px;
+	right: 0;
+	left: 86%;
+	margin: 0;
+	opacity: 0;
+	font-size: 1em;
+	text-align: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	border: none;
+	outline: none;
+	color: #fff;
+	background-color: rgb(85, 19, 85);
+	text-shadow: 0 0 3px #7a3cc7;
+	cursor: pointer;
+	transform-origin: right;
+	transform: scale(0);
+	transition: all .6s;
+	transition-delay: .2s;
+}
+
+.show-btn {
+	position: absolute;
+	top: 0;
+	right: 3%;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+	border-radius: 50%;
+	cursor: pointer;
+	outline: none;
+	color: rgb(85, 19, 85);
+	text-align: center;
+	background-color: #fff;
+	display: inline-block;
+	transform: translateX(2%);
+	transition: right .6s, transform .6s;
+}
+
+.logo {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-size: 25px;
+	position: absolute;
+	top: 13px;
+	left: 20px;
+	color: #fff;
+	font-family: 'Roboto';
+	font-size: 1em;
+	text-transform: uppercase;
+	font-weight: 600;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .22);
+	-moz-transform-origin: left;
+	transform-origin: left;
+	transform: translate(0);
+	transition: left .7s, transform .7s;
+}
+
+.show-btn i {
+	font-size: 1.2em;
+	text-shadow: 0 0 3px #7a3cc7;
+}
+
+input[id^=display] {
+	display: none;
+}
+
+input[id^=display]:checked ~ label .search-input {
+	visibility: visible;
+	width: 100%;
+	padding: 0 38px 0 20px;
+}
+
+.search-input::-webkit-input-placeholder {
+	font-size: .76em;
+	letter-spacing: 0.1em;
+	transform: translate(-200%);
+	transition: left .7s, transform .7s;
+}
+
+input[id^=display]:checked ~ label .search-input::-webkit-input-placeholder {
+	position: relative;
+	transform: translate(0%);
+}
+
+input[id^=display]:checked ~ label form .btn {
+	right: -57px;
+	opacity: 1;
+	transform: scale(1);
+	-webkit-animation: fade 1s;
+	animation: fade 1s;
+	transition-delay: 0s;
+}
+
+input[id^=display]:checked ~ label .show-btn {
+	right: 86%;
+	transform: translateX(85%);
+	-webkit-animation: verticalSlide 1s infinite alternate;
+	animation: verticalSlide 1s infinite alternate;
+}
+
+input[id^=display]:checked ~ label .show-btn i::before {
+	content: '\f00d';
+	color: rgb(145, 22, 22);
+}
+
+input[id^=display]:checked ~ label .logo {
+	transform: translate(-200%);
+}
+
+/*======================== Temperature props ==================*/
+
+.country-city {
+	font-size: 24px;
+	font-weight: 600;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+}
+
+.weather-wrapper_img {
+	width: 100%;
+	text-align: center;
+}
+
+.avatar {
+	width: 100px;
+	margin-top: -6px;
+	-webkit-animation: horizontalSlide 2s infinite alternate;
+	animation: horizontalSlide 2s infinite alternate;
+}
+
+.temperature-wrapper {
+	margin: 10px auto;
+	text-shadow: 0 3px 6px rgb(59, 62, 65);
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.09);
+	background-color: rgba(255, 255, 255, .21);
+	transition: all .3s;
+}
+
+.temperature-content {
+	display: flex;
+	justify-content: space-around;
+}
+
+.temperature-main {
+	text-align: center;
+	font-size: 55px;
+	font-weight: 700;
+	text-rendering: optimizeLegibility;
+	color: rgb(145, 22, 22);
+	color: #fff;
+}
+
+.temperature-main sup {
+	font-family: roboto;
+	display: inline-block;
+	text-shadow: none;
+	font-size: 55px;
+	background: linear-gradient(to right, rgb(145, 22, 22) 50%, #d32f2f 50%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: spin 3s linear infinite;
+	overflow: hidden;
+}
+
+.temperature-subs {
+	padding: 15px;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	text-shadow: 0 3px 6px rgb(59, 62, 65, .9);
+}
+
+.sun {
+	color: #fff;
+	display: flex;
+	justify-content: space-evenly;
+	transition: 5s;
+}
+
+.sun-content p i {
+	font-weight: 400;
+	font-size: 25px;
+	text-shadow: none;
+	-webkit-animation: blink 1s infinite alternate ease-in-out;
+	animation: blink 1s infinite alternate ease-in-out;
+}
+
+.sun i {
+	font-weight: 400;
+	font-size: 25px;
+	padding-right: 8px;
+	text-shadow: none;
+	-webkit-animation: blink 1s infinite alternate ease-in-out;
+	animation: blink 1s infinite alternate ease-in-out;
+}
+
+.btn-control {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 15px;
+	transition: all 1s;
+}
+
+.btn-control__info {
+	color:#fff;
+	padding: 8px;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	/* background-color: rgba(255, 255, 255, .8); */
+	background-color: transparent;
+	outline: none;
+	cursor: pointer;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+	box-shadow: 0 0 3px#fff;
+	transition: all .5s;
+}
+
+.btn-control__info:hover {
+	color: rgb(145, 22, 22);
+	border-color:rgb(145, 22, 22);
+	box-shadow: 0px 5px 20px -12px #000000;
+	transition: all .5s;
+}
+
+.btn-control__arrow i {
+	font-size: 1.4em;
+	border: none;
+	outline: none;
+	color: #fff;
+	background-color: transparent;
+	text-shadow: 0 0 3px #7a3cc7;
+	cursor: pointer;
+	-moz-transform-origin: right;
+	transform-origin: right;
+	-webkit-animation: verticalSlide 1s infinite alternate;
+	animation: verticalSlide .3s infinite alternate;
+}
+
+/* .degress {
+	display: inline-block;
+	position: relative;
+	color:#F44336;
+	animation: spin 2s linear infinite;
+}
+
+.degress:before {
+	content: attr(data-char);
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	color: #D32F2F;
+} */
+
+.humidity_description {
+	width: 100%;
+	text-transform: capitalize;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.upper-section {
+	margin: 15px 25px 0px 25px;
+}
+
+.lower-Section {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	width: 100%;
+	text-transform: capitalize;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: space-between;
+	background: #fff;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	padding: 15px;
+	margin-top: 5px;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+}
+
+.lower-section__content i {
+	padding-right: 5px;
+	color: #924da3;
+	text-shadow: none;
+	-webkit-animation: zoomIn 1s infinite alternate;
+	animation: zoomIn 4s infinite alternate;
+}
+
+.lower-section__item {
+	padding-top: 10px;
+}
+
+/*============= Animations backgroundImg ==============*/
+
+@-webkit-keyframes backgroundImg {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}
+
+@keyframes backgroundImg {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}
+
+/*============= Animations fade ==============*/
+
+@-webkit-keyframes fade {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+/*============= Animations verticalSlide ==============*/
+
+@-webkit-keyframes verticalSlide {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(4px);
+	}
+}
+
+@keyframes verticalSlide {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(4px);
+	}
+}
+
+/*============= Animations horizontalSlide ==============*/
+
+@-webkit-keyframes horizontalSlide {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-6px);
+	}
+}
+
+@keyframes horizontalSlide {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-6px);
+	}
+}
+
+/*============= Animations zoomIn ==============*/
+
+@-webkit-keyframes zoomIn {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.3);
+	}
+}
+
+@keyframes zoomIn {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.3);
+	}
+}
+
+/*============= Animations spin ==============*/
+
+@-webkit-keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/*============= Animations blink ==============*/
+
+@-webkit-keyframes blink {
+	0% {
+		opacity: 0.5;
+		transform: scaleX(0);
+	}
+	100% {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0.5;
+		transform: scaleX(0);
+	}
+	100% {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+}
+
+/* @media all and (max-width: 1037px) {
+	.weather_details {
+    width: auto;
+  }
+} */
+
