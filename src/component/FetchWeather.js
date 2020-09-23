@@ -14,7 +14,8 @@ import Storm from './../images/storm.jpg';
 import Spinner from './Spinner'
 
 
-const API_KEY = process.env.REACT_APP_API_KEY
+// const API_KEY = process.env.REACT_APP_API_KEY
+const API_KEY = '16c772c85cc7406ce72731159d78b31b'
 //const URL = '//api.openweathermap.org/data/2.5/'
 const FORECAST_URL = "https://cors-anywhere.herokuapp.com///api.openweathermap.org/data/2.5/forecast/?"
 
@@ -66,7 +67,7 @@ const FetchWeather = () => {
                     (<><Spinner /><h4>Current Position Cannot be Found. Please do a Custom Search.</h4></>)
             }
         }
-       // showGeoLocation();
+       showGeoLocation();
     }, []);
 
     //========= conditions for searching through the API =========
