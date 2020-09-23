@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, withRouter, useLocation } from "react-router-dom";
+import { Route, Switch, withRouter, useLocation, Redirect  } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Geolocation from './Geolocation'
 import DisplayInfo from './DisplayInfo'
@@ -149,7 +149,8 @@ const FetchWeather = () => {
         return Clear
     }
 
-    //console.log(location.key)
+   // console.log(location.key)
+   // console.log(forecast)
 
     return (
 
@@ -158,10 +159,10 @@ const FetchWeather = () => {
                 <div className="search-wrapper" onSubmit={requestWeatherDetail} >
                     <Form />
                 </div>
-                {((forecast && Object.keys(forecast).length)) ?
+                {((forecast && Object.keys(forecast).length)) ? 
                     <AnimatePresence exitBeforeEnter initial={false}>
                         <Switch location={location} key={location.pathname}>
-                            {/* <Redirect exact from="/" to="/geolocation" />  */}
+                             {/* <Redirect exact from="/" to="/geolocation" /> */}
                             <Route exact path="/">
                                 {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
                             </Route>
