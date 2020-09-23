@@ -66,7 +66,7 @@ const FetchWeather = () => {
                     (<><Spinner /><h4>Current Position Cannot be Found. Please do a Custom Search.</h4></>)
             }
         }
-        showGeoLocation();
+       // showGeoLocation();
     }, []);
 
     //========= conditions for searching through the API =========
