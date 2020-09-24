@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, withRouter, useLocation, Redirect  } from "react-router-dom";
+import { Route, Switch, withRouter, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Geolocation from './Geolocation'
 import DisplayInfo from './DisplayInfo'

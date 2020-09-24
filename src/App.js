@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter forceRefresh={true} basename={process.env.PUBLIC_URL + '/'}>
       <FetchWeather />
     </BrowserRouter>
   );
