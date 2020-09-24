@@ -5,3 +5,4 @@ react-moment and moment for date and time formatting <br>
 react-chartist and chartist for plotting charts <br>
 Openweathermap API is the only API used for this application.<br>
 [Demo Link](https://reactweather-ani.netlify.app/)
+
