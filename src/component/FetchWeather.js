@@ -34,41 +34,45 @@ const FetchWeather = () => {
     const fetchCurrentLocation = async (latitude, longitude) => {
         const api_call = await fetch(`${FORECAST_URL}lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`),
             result = await api_call.json();
-
         try {
             let dailyForecast = []
             for (let i = 0; i < result.list.length; i += 8) {
                 dailyForecast.push(result.list[i])
             }
-
             setForecast(result);
-            //console.log(result)
+            setCondition(dailyForecast[0].weather[0].main);
+        }
+        catch (error) {
+            if (result.cod === 429) {
+                setError(
+                    <><Spinner /><h4 style={{ color: 'red' }}>Request Limit for the Day Exceeded, Please try again later. </h4></>
+                );
+            } else {
+                setError(
+                    (<><Spinner /><h4>Current Position Cannot be Found. Please do a Custom Search.</h4></>)
+                );
+            }
         }
 
-        catch (error) {
+    }
+
+
+    //========= Display default weather on load =========
+    const showGeoLocation = () => {
+        try {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    fetchCurrentLocation(position.coords.latitude, position.coords.longitude);
+                }, e => console.log(e));
+            }
+
+        } catch (error) {
             setError
                 (<><Spinner /><h4>Current Position Cannot be Found. Please do a Custom Search.</h4></>)
         }
     }
 
-
-    //========= Display default weather =========
-    useEffect(() => {
-        const showGeoLocation = async () => {
-            try {
-                if ('geolocation' in navigator) {
-                    navigator.geolocation.getCurrentPosition((position) => {
-                        fetchCurrentLocation(position.coords.latitude, position.coords.longitude);
-                    }, e => console.log(e));
-                }
-
-            } catch (error) {
-                setError
-                    (<><Spinner /><h4>Current Position Cannot be Found. Please do a Custom Search.</h4></>)
-            }
-        }
-       showGeoLocation();
-    }, []);
+    useEffect(showGeoLocation, [])
 
     //========= conditions for searching through the API =========
     const requestWeatherDetail = async (e) => {
@@ -78,7 +82,7 @@ const FetchWeather = () => {
         if (query) {
 
             const weatherFeed = await fetch(`${FORECAST_URL}q=${query}&units=metric&APPID=${API_KEY}`),
-            responseForecast = await weatherFeed.json();
+                responseForecast = await weatherFeed.json();
 
             //====== Getting the five days forecast data array ======
 
@@ -92,9 +96,9 @@ const FetchWeather = () => {
                 setError(null)
 
             } catch (error) {
-                if (responseForecast.message === 429) {
+                if (responseForecast.cod === 429) {
                     setError(
-                        <><Spinner /><h4 style={{ color: 'red' }}>{responseForecast.message}</h4></>
+                        <><Spinner /><h4 style={{ color: 'red' }}>Request Limit for the Day Exceeded, Please try again later. </h4></>
                     );
                 } else {
                     setError(
@@ -113,7 +117,6 @@ const FetchWeather = () => {
 
     //========= conditions for changing the background image =========
     const changeBackgroundImg = () => {
-
 
         if (condition === 'Clouds') {
             return Cloud
@@ -149,36 +152,34 @@ const FetchWeather = () => {
         return Clear
     }
 
-   // console.log(location.key)
-   // console.log(forecast)
+
 
     return (
 
         <center>
-            <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
-                <div className="search-wrapper" onSubmit={requestWeatherDetail} >
-                    <Form />
-                </div>
-                {((forecast && Object.keys(forecast).length)) ? 
-                    <AnimatePresence exitBeforeEnter initial={false}>
-                        <Switch location={location} key={location.pathname}>
-                             {/* <Redirect exact from="/" to="/geolocation" /> */}
-                            <Route exact path="/">
-                                {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-
-                            <Route exact path="/displayinfo">
-                                {!error ? <DisplayInfo {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-
-                            <Route exact path="/displayforecast">
-                                {!error ? <DisplayForecast {...forecast} {...requestWeatherDetail} /> : error}
-                            </Route>
-                        </Switch>
-                    </AnimatePresence>
-                    : <span style={errormsg}>{error}{icon}</span>}
+        <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
+            <div className="search-wrapper" onSubmit={requestWeatherDetail} >
+                <Form />
             </div>
-        </center>
+            {((forecast && Object.keys(forecast).length)) ?
+                <AnimatePresence exitBeforeEnter initial={false}>
+                    <Switch location={location} key={location.pathname}>
+                        <Route exact path="/">
+                            {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
+                        </Route>
+
+                        <Route exact path="/displayinfo">
+                            {!error ? <DisplayInfo forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
+                        </Route>
+
+                        <Route exact path="/displayforecast">
+                            {!error ? <DisplayForecast forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
+                        </Route>
+                    </Switch>
+                </AnimatePresence>
+                : <span style={errormsg}>{error}{icon}</span>}
+        </div>
+    </center>
     )
 }
 

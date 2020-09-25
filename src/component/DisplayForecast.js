@@ -16,7 +16,7 @@ import '../styles/displayforecast.css'
 
 
 
-const DisplayForecast = (forecast) => {
+const DisplayForecast = ({ forecast, showGeoLocation }) => {
 
     //======= Navigation functions =========
 
@@ -111,6 +111,7 @@ const DisplayForecast = (forecast) => {
 
     return (
 
+       
         <motion.div
             initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 1, scale: 1 }}
@@ -120,11 +121,18 @@ const DisplayForecast = (forecast) => {
                 <section className="graph-section">
                     <TemperatureChart {...forecast} />
 
-                    <span className='btn-direction'><i className="fas fa-arrow-down"></i></span>
-                    <span><button type="button" onClick={handleClick} className='btn-info'><h4>Get Today's Forecast</h4></button></span>
+                    <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between' }}>
+                        <span>
+                            <button type="button" onClick={handleClick} className='btn-info'><h4>Get Today's Forecast</h4></button>
+                        </span>
 
-                    <div style={{ textAlign: 'left', textShadow: 'text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px', marginBottom: '-16px', color: '#1A237E', paddingTop: '2px' }}>
-                        <h4>{forecast.city.name}, {forecast.city.country} <span style={{ color: '#f65' }}>|</span> {Math.round(fiveDayForecast()[0].main.temp_max)}°c</h4>
+                        <span>
+                            <button type="button" onClick={showGeoLocation} className='btn-info__annex'><h4>Get Current Location</h4></button>
+                        </span>
+                    </div>
+
+                    <div style={{ textAlign: 'left', textShadow: 'text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px', marginBottom: '-16px', color: '#516', paddingTop: '2px' }}>
+                        <h4>{forecast.city.name}, {forecast.city.country} <span style={{ color: 'rgb(145, 22, 22)' }}>|</span> {Math.round(fiveDayForecast()[0].main.temp_max)}°c</h4>
                     </div>
                 </section>
                 {ShowForecast}

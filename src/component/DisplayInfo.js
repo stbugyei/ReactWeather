@@ -15,7 +15,7 @@ import OvercastClouds from '../animated/cloudy.svg'
 
 
 
-const DisplayInfo = (forecast) => {
+const DisplayInfo = ({ forecast, showGeoLocation }) => {
     //console.log(forecast)
 
     //======= Navigation functions =========
@@ -134,9 +134,14 @@ const DisplayInfo = (forecast) => {
                     </div>
                 </section>
 
-                <div style={{ width: '100%', padding: '0px 10px' }}>
-                    <span className='btn-direction'><i className="fas fa-arrow-down"></i></span>
-                    <span><button type="button" onClick={handleClick} className='btn-info'><h4>Get 5-Day Forecast</h4></button></span>
+                <div className="btn-control__wrapper">
+                    <span>
+                        <button type="button" onClick={handleClick} className='btn-info'><h4>Get 5-Day Forecast</h4></button>
+                    </span>
+
+                    <span>
+                        <button type="button" onClick={showGeoLocation} className='btn-info__annex'><h4>Get Current Location</h4></button>
+                    </span>
                 </div>
 
                 <section className="lower-Section">

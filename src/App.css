@@ -172,7 +172,7 @@ input[id^=display] {
 input[id^=display]:checked ~ label .search-input {
 	visibility: visible;
 	width: 100%;
-	padding: 0 38px 0 20px;
+	padding: 0 45px 0 20px;
 }
 
 .search-input::-webkit-input-placeholder {
@@ -313,8 +313,17 @@ input[id^=display]:checked ~ label .logo {
 	transition: all 1s;
 }
 
+.btn-control__wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin: 0px 15px 10px;
+	transition: all 1s;
+}
+
+
 .btn-control__info {
-	color:#fff;
+	color: #fff;
 	padding: 8px;
 	border: 2px solid #fff;
 	border-radius: 5px;
@@ -329,7 +338,7 @@ input[id^=display]:checked ~ label .logo {
 
 .btn-control__info:hover {
 	color: rgb(145, 22, 22);
-	border-color:rgb(145, 22, 22);
+	border-color: rgb(145, 22, 22);
 	box-shadow: 0px 5px 20px -12px #000000;
 	transition: all .5s;
 }
@@ -547,6 +556,26 @@ input[id^=display]:checked ~ label .logo {
 	100% {
 		opacity: 1;
 		transform: scaleX(1);
+	}
+}
+
+/*============= Button highlight ==============*/
+
+@-webkit-keyframes highlight {
+	50% {
+		transition: all 1s;
+		color: rgb(145, 22, 22);
+		border-color:rgb(145, 22, 22);
+		box-shadow: 0 0 3px rgb(145, 22, 22);
+	}
+}
+
+@keyframes highlight {
+	50% {
+		transition: all 1s ;
+		color: rgb(145, 22, 22);
+		border-color:rgb(145, 22, 22);
+		box-shadow: 0 0 3px rgb(145, 22, 22);
 	}
 }
 
