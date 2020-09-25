@@ -16,7 +16,7 @@ import Spinner from './Spinner'
 
 // const API_KEY = process.env.REACT_APP_API_KEY
 //const URL = '//api.openweathermap.org/data/2.5/'
-const API_KEY = "b2ef7b3ccbdb6c1a8cfc6cc6b959fd92";
+const API_KEY = "b025832c52f17370a6893bceec8d291e";
 const FORECAST_URL = "//api.openweathermap.org/data/2.5/forecast/?"
 
 
