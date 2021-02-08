@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory, withRouter } from "react-router-dom";
-import { motion } from "framer-motion";
 import Moment from './Moment'
 import moment from 'moment';
 import Thunder from '../animated/thunder.svg'
@@ -90,11 +89,6 @@ const DisplayInfo = ({ forecast, showGeoLocation }) => {
     return (
 
         <div className='display-information'>
-            <motion.div
-                initial={{ opacity: 0, scale: 1 }}
-                animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 1, scale: 1 }}
-                transition={{ type: "tween", duration: 0.5, ease: "easeIn" }}
-            >
                 <section className="upper-section">
 
                     <div className='country-city'>
@@ -160,7 +154,6 @@ const DisplayInfo = ({ forecast, showGeoLocation }) => {
                         <div>  <p className='lower-section__item'>pressure</p> <i className="wi wi-wind-direction"></i> {DayOne.main.pressure}hPa</div>
                     </div>
                 </section>
-            </motion.div>
         </div>
     )
 }

@@ -1,8 +1,10 @@
 .display-forecast {
 	position: relative;
 	width: 100%;
+	height: 585px;
 	display: flex;
 	flex-direction: column;
+	animation: fade 1s;
 }
 
 .data-section {

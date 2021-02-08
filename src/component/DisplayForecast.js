@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory, withRouter } from "react-router-dom";
-import { motion } from "framer-motion";
 import moment from 'moment';
 import TemperatureChart from './TemperatureChart';
 import Thunder from '../animated/thunder.svg'
@@ -109,14 +108,8 @@ const DisplayForecast = ({ forecast, showGeoLocation }) => {
     ))
 
 
-    return (
+    return ( 
 
-       
-        <motion.div
-            initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 1, scale: 1 }}
-            transition={{ type: "tween", duration: 0.5, ease: "easeIn" }}
-        >
             <div className='display-forecast'>
                 <section className="graph-section">
                     <TemperatureChart {...forecast} />
@@ -131,13 +124,12 @@ const DisplayForecast = ({ forecast, showGeoLocation }) => {
                         </span>
                     </div>
 
-                    <div style={{ textAlign: 'left', textShadow: 'text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px', marginBottom: '-16px', color: '#516', paddingTop: '2px' }}>
+                    <div style={{ textAlign: 'left', textShadow: 'text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px', marginBottom: '-16px', color: '#516', paddingTop: '6px' }}>
                         <h4>{forecast.city.name}, {forecast.city.country} <span style={{ color: 'rgb(145, 22, 22)' }}>|</span> {Math.round(fiveDayForecast()[0].main.temp_max)}°c</h4>
                     </div>
                 </section>
                 {ShowForecast}
             </div>
-        </motion.div>
     )
 }
 

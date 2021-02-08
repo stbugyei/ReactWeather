@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, withRouter, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import Geolocation from './Geolocation'
 import DisplayInfo from './DisplayInfo'
 import DisplayForecast from './DisplayForecast'
@@ -157,29 +156,28 @@ const FetchWeather = () => {
     return (
 
         <center>
-        <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
-            <div className="search-wrapper" onSubmit={requestWeatherDetail} >
-                <Form />
+            <div className='weather_details' style={{ backgroundImage: `url(${changeBackgroundImg()})` }} >
+                <div className="search-wrapper" onSubmit={requestWeatherDetail} >
+                    <Form />
+                </div>
+                {((forecast && Object.keys(forecast).length)) ?
+                    <>
+                        <Switch location={location} key={location.pathname}>
+                            <Route exact path="/">
+                                {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
+                            </Route>
+
+                            <Route exact path="/displayinfo">
+                                {!error ? <DisplayInfo forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
+                            </Route>
+
+                            <Route exact path="/displayforecast">
+                                {!error ? <DisplayForecast forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
+                            </Route>
+                        </Switch></>
+                    : <span style={errormsg}>{error}{icon}</span>}
             </div>
-            {((forecast && Object.keys(forecast).length)) ?
-                <AnimatePresence exitBeforeEnter initial={false}>
-                    <Switch location={location} key={location.pathname}>
-                        <Route exact path="/">
-                            {!error ? <Geolocation  {...forecast} {...requestWeatherDetail} /> : error}
-                        </Route>
-
-                        <Route exact path="/displayinfo">
-                            {!error ? <DisplayInfo forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
-                        </Route>
-
-                        <Route exact path="/displayforecast">
-                            {!error ? <DisplayForecast forecast={forecast} showGeoLocation={showGeoLocation} {...requestWeatherDetail} /> : error}
-                        </Route>
-                    </Switch>
-                </AnimatePresence>
-                : <span style={errormsg}>{error}{icon}</span>}
-        </div>
-    </center>
+        </center>
     )
 }
 
@@ -190,3 +188,4 @@ const errormsg = {
     margin: '30px',
     textAlign: 'center',
 };
+

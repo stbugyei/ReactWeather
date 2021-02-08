@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory, withRouter } from "react-router-dom";
-import { motion } from "framer-motion";
 import Moment from './Moment'
 import moment from 'moment';
 import Thunder from '../animated/thunder.svg'
@@ -97,12 +96,7 @@ const Geolocation = (forecast) => {
     return (
 
         <div className='geographic-loc'>
-            <motion.div
-                initial={{ opacity: 0, scale: 1 }}
-                animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 1, scale: 1 }}
-                transition={{ type: "tween", duration: 0.5, ease: "easeIn" }}
-            >
-                <section className="upper-section">
+                <section className="upper-section" >
 
                     <div className='country-city'>
                         <h1>{forecast.city.name}, {forecast.city.country}</h1>
@@ -151,7 +145,6 @@ const Geolocation = (forecast) => {
                         <span className='btn-control__arrow'><i className="fas fa-arrow-left"></i></span>
                     </>
                 </div>
-            </motion.div>
         </div>
     )
 }
