@@ -1,13 +1,15 @@
 .display-forecast {
 	position: relative;
 	width: 100%;
-	height: 585px;
+	/* height: 585px; */
 	display: flex;
 	flex-direction: column;
 	animation: fade 1s;
 }
 
 .data-section {
+	width: 100%;
+	height: 100%;
 	font-size: 17px;
 	display: flex;
 	flex-direction: column;
@@ -57,8 +59,9 @@
 }
 
 .graph-section {
-	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+	height: 205px;
 	margin: 20px auto;
+	text-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
 }
 
 .btn-details__wrapper {

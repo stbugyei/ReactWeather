@@ -24,7 +24,7 @@
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-between;
 	background-size: cover;
 	background-position: 0px 0px;
 	background-repeat: repeat-x;
@@ -575,17 +575,26 @@ input[id^=display]:checked ~ label .logo {
 	}
 }
 
+/* @media all and (max-width: 1037px) {
+	.weather_details {
+    width: auto;
+  }
+} */
 
 @media (min-width: 320px) and (max-width: 480px) {
 	.weather_details {
 		width: 100%;
 		height: 100%;
 		border-radius: initial;
+		position: absolute;
+		top: initial;
+		right: initial;
+		transform: initial;
 	}
 
-	.geographic-loc {
-		 margin-top: 115px; 
-	}
+	/* .geographic-loc {
+		margin-top: 115px;
+	} */
 
 	.lower-Section {
 		border-bottom-right-radius: initial;
@@ -598,5 +607,15 @@ input[id^=display]:checked ~ label .logo {
 
 	.temperature-main {
 		font-size: 50px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+	.weather_details {
+		position: relative;
+		top: initial;
+		right: initial;
+		transform: initial; 
+		margin: 40px auto;
 	}
 }
